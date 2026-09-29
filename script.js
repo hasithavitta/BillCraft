@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const clearInvoiceBtn = document.getElementById("clearInvoiceBtn");
     const generateInvoiceBtn = document.getElementById("generateInvoiceBtn");
     const printInvoiceBtn = document.getElementById("printInvoiceBtn");
+    const downloadPdfBtn = document.getElementById("downloadPdfBtn");
     const invoiceStatus = document.getElementById("invoiceStatus");
 
     const businessName = document.getElementById("businessName");
@@ -941,6 +942,7 @@ function showInvoiceStatus(message, type) {
             updateInvoice();
 
             printInvoiceBtn.disabled = true;
+            downloadPdfBtn.disabled = true;
 
             invoiceStatus.textContent = "";
             invoiceStatus.className = "invoice-status";
@@ -1006,6 +1008,7 @@ generateInvoiceBtn.addEventListener(
          */
 
         printInvoiceBtn.disabled = false;
+        downloadPdfBtn.disabled = false;
 
 
         /*
@@ -1053,6 +1056,207 @@ generateInvoiceBtn.addEventListener(
         }
     );
 
+    /* =====================================================
+   DOWNLOAD INVOICE AS PDF
+===================================================== */
+
+downloadPdfBtn.addEventListener(
+    "click",
+    async () => {
+
+        /*
+         * Make sure the invoice has been generated.
+         */
+
+        if (downloadPdfBtn.disabled) {
+            return;
+        }
+
+
+        /*
+         * Check that the PDF libraries loaded.
+         */
+
+        if (
+            typeof html2canvas === "undefined" ||
+            typeof window.jspdf === "undefined"
+        ) {
+
+            showInvoiceStatus(
+                "PDF libraries could not be loaded. Please refresh the page and try again.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        const invoice =
+            document.getElementById(
+                "invoicePreview"
+            );
+
+
+        showInvoiceStatus(
+            "Preparing your PDF...",
+            "success"
+        );
+
+
+        try {
+
+            /*
+             * Convert invoice preview to canvas.
+             */
+
+            const canvas =
+                await html2canvas(
+                    invoice,
+                    {
+                        scale: 2,
+                        backgroundColor: "#ffffff",
+                        useCORS: true,
+                        logging: false
+                    }
+                );
+
+
+            const imageData =
+                canvas.toDataURL(
+                    "image/png"
+                );
+
+
+            /*
+             * Create PDF.
+             */
+
+            const {
+                jsPDF
+            } = window.jspdf;
+
+
+            const pdf =
+                new jsPDF({
+                    orientation: "portrait",
+                    unit: "mm",
+                    format: "a4"
+                });
+
+
+            const pageWidth =
+                pdf.internal.pageSize.getWidth();
+
+            const pageHeight =
+                pdf.internal.pageSize.getHeight();
+
+
+            const margin = 10;
+
+
+            const usableWidth =
+                pageWidth - (margin * 2);
+
+
+            const imageRatio =
+                canvas.height /
+                canvas.width;
+
+
+            const imageHeight =
+                usableWidth * imageRatio;
+
+
+            /*
+             * Fit the invoice onto A4.
+             */
+
+            if (
+                imageHeight <=
+                pageHeight - (margin * 2)
+            ) {
+
+                pdf.addImage(
+                    imageData,
+                    "PNG",
+                    margin,
+                    margin,
+                    usableWidth,
+                    imageHeight
+                );
+
+            } else {
+
+                const maxHeight =
+                    pageHeight - (margin * 2);
+
+
+                const scale =
+                    maxHeight / imageHeight;
+
+
+                const finalWidth =
+                    usableWidth * scale;
+
+
+                pdf.addImage(
+                    imageData,
+                    "PNG",
+                    margin,
+                    margin,
+                    finalWidth,
+                    maxHeight
+                );
+
+            }
+
+
+            /*
+             * Create filename.
+             */
+
+            const number =
+                getValue(
+                    invoiceNumber,
+                    "INV-001"
+                );
+
+
+            const safeNumber =
+                number.replace(
+                    /[^a-zA-Z0-9-_]/g,
+                    "-"
+                );
+
+
+            pdf.save(
+                `BillCraft-${safeNumber}.pdf`
+            );
+
+
+            showInvoiceStatus(
+                "✓ PDF downloaded successfully.",
+                "success"
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "PDF generation error:",
+                error
+            );
+
+
+            showInvoiceStatus(
+                "Unable to generate the PDF. Please try again.",
+                "error"
+            );
+
+        }
+
+    }
+);
 
     /* =====================================================
        INITIAL UPDATE

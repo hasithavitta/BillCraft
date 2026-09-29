@@ -1000,19 +1000,30 @@ How It Works
 
             <!-- Preview Actions -->
 
-            <div class="preview-actions">
+<div class="preview-actions">
 
-<button
-    type="button"
-    class="btn-secondary"
-    id="printInvoiceBtn"
-    disabled
->
-    <i class='bx bx-printer'></i>
-    Print Invoice
-</button>
+    <button
+        type="button"
+        class="btn-secondary"
+        id="printInvoiceBtn"
+        disabled
+    >
+        <i class='bx bx-printer'></i>
+        Print Invoice
+    </button>
 
-            </div>
+
+    <button
+        type="button"
+        class="btn-primary"
+        id="downloadPdfBtn"
+        disabled
+    >
+        <i class='bx bx-download'></i>
+        Download PDF
+    </button>
+
+</div>
 
         </div>
 
@@ -1440,6 +1451,8 @@ How It Works
 
 </section>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
