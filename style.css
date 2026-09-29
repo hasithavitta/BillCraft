@@ -350,75 +350,79 @@ How It Works
 
 
 
-/* Responsive */
+/* ==============================
+   RESPONSIVE
+============================== */
 
-@media(max-width:991px){
-header{
-    flex-direction:column;
-    gap:20px;
-}
+@media (max-width: 991px) {
 
-.navbar{
-    flex-wrap:wrap;
-    justify-content:center;
-}
-
-.home{
-    grid-template-columns:1fr;
-    text-align:center;
-}
-
-.text p{
-    margin:auto;
-    margin-bottom:30px;
-}
-
-.invoice-card{
-    width:100%;
-}
-
-.features-container{
-    grid-template-columns:repeat(2,1fr);
-}
-
-.section-heading h2{
-    font-size:2.2rem;
-}
-
-.workflow-container{
-    flex-wrap:wrap;
-}
-
-.workflow-line{
-    display:none;
-}
-
-.workflow-box{
-    width:45%;
-}
-
-@media(max-width:600px){
-    .features{
-        padding:70px 6%;
+    header {
+        flex-direction: column;
+        gap: 20px;
     }
 
-    .features-container{
-        grid-template-columns:1fr;
+    .navbar {
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
-    .section-heading h2{
-        font-size:2rem;
+    .home {
+        grid-template-columns: 1fr;
+        text-align: center;
     }
 
-    .workflow-container{
-        flex-direction:column;
+    .text p {
+        margin: auto;
+        margin-bottom: 30px;
     }
 
-    .workflow-box{
-        width:100%;
-        max-width:350px;
+    .invoice-card {
+        width: 100%;
+    }
+
+    .features-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .section-heading h2 {
+        font-size: 2.2rem;
+    }
+
+    .workflow-container {
+        flex-wrap: wrap;
+    }
+
+    .workflow-line {
+        display: none;
+    }
+
+    .workflow-box {
+        width: 45%;
     }
 }
+
+@media (max-width: 600px) {
+
+    .features {
+        padding: 70px 6%;
+    }
+
+    .features-container {
+        grid-template-columns: 1fr;
+    }
+
+    .section-heading h2 {
+        font-size: 2rem;
+    }
+
+    .workflow-container {
+        flex-direction: column;
+    }
+
+    .workflow-box {
+        width: 100%;
+        max-width: 350px;
+    }
 }
 
 /* =========================================================
