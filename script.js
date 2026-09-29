@@ -1318,3 +1318,169 @@ faqItems.forEach(item => {
     );
 
 });
+
+/* =========================================================
+   CONTACT FORM
+========================================================= */
+
+const contactForm =
+    document.getElementById("contactForm");
+
+const contactStatus =
+    document.getElementById("contactStatus");
+
+
+if (contactForm) {
+
+    contactForm.addEventListener(
+        "submit",
+        (event) => {
+
+            event.preventDefault();
+
+
+            const name =
+                document
+                    .getElementById("contactName")
+                    .value
+                    .trim();
+
+
+            const email =
+                document
+                    .getElementById("contactEmail")
+                    .value
+                    .trim();
+
+
+            const subject =
+                document
+                    .getElementById("contactSubject")
+                    .value
+                    .trim();
+
+
+            const message =
+                document
+                    .getElementById("contactMessage")
+                    .value
+                    .trim();
+
+
+            /*
+             * Basic validation
+             */
+
+            if (
+                !name ||
+                !email ||
+                !subject ||
+                !message
+            ) {
+
+                contactStatus.textContent =
+                    "Please fill in all the fields.";
+
+                contactStatus.className =
+                    "contact-status error";
+
+                return;
+
+            }
+
+
+            /*
+             * Basic email validation
+             */
+
+            const emailPattern =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+            if (
+                !emailPattern.test(email)
+            ) {
+
+                contactStatus.textContent =
+                    "Please enter a valid email address.";
+
+                contactStatus.className =
+                    "contact-status error";
+
+                return;
+
+            }
+
+
+            /*
+             * Frontend-only confirmation.
+             *
+             * No message is actually sent because
+             * there is currently no backend/email service.
+             */
+
+            contactStatus.textContent =
+                `Thanks ${name}! Your message has been prepared successfully.`;
+
+            contactStatus.className =
+                "contact-status success";
+
+
+            /*
+             * Reset the form after successful submission.
+             */
+
+            contactForm.reset();
+
+        }
+    );
+
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+const currentYear =
+    document.getElementById("currentYear");
+
+if (currentYear) {
+
+    currentYear.textContent =
+        new Date().getFullYear();
+
+}
+
+
+/* =========================================================
+   BACK TO TOP
+========================================================= */
+
+const backToTop =
+    document.getElementById("backToTop");
+
+
+if (backToTop) {
+
+    window.addEventListener(
+        "scroll",
+        () => {
+
+            if (window.scrollY > 500) {
+
+                backToTop.classList.add(
+                    "visible"
+                );
+
+            } else {
+
+                backToTop.classList.remove(
+                    "visible"
+                );
+
+            }
+
+        }
+    );
+
+}
