@@ -696,26 +696,34 @@ How It Works
 
             <div class="invoice-actions">
 
-                <button
-                    type="button"
-                    class="btn-secondary invoice-clear-btn"
-                    id="clearInvoiceBtn"
-                >
-                    <i class='bx bx-reset'></i>
-                    Clear
-                </button>
+    <button
+        type="button"
+        class="btn-secondary invoice-clear-btn"
+        id="clearInvoiceBtn"
+    >
+        <i class='bx bx-reset'></i>
+        Clear
+    </button>
 
 
-                <button
-                    type="button"
-                    class="btn-primary invoice-generate-btn"
-                    id="generateInvoiceBtn"
-                >
-                    <i class='bx bx-file'></i>
-                    Generate Invoice
-                </button>
+    <button
+        type="button"
+        class="btn-primary invoice-generate-btn"
+        id="generateInvoiceBtn"
+    >
+        <i class='bx bx-file'></i>
+        Generate Invoice
+    </button>
 
-            </div>
+</div>
+
+
+<div
+    class="invoice-status"
+    id="invoiceStatus"
+    aria-live="polite"
+>
+</div>
 
         </div>
 
@@ -994,14 +1002,15 @@ How It Works
 
             <div class="preview-actions">
 
-                <button
-                    type="button"
-                    class="btn-secondary"
-                    id="printInvoiceBtn"
-                >
-                    <i class='bx bx-printer'></i>
-                    Print Invoice
-                </button>
+<button
+    type="button"
+    class="btn-secondary"
+    id="printInvoiceBtn"
+    disabled
+>
+    <i class='bx bx-printer'></i>
+    Print Invoice
+</button>
 
             </div>
 
@@ -1011,6 +1020,425 @@ How It Works
 
 </section>
 
+<!-- ==============================
+     About BillCraft
+============================== -->
+
+<section class="about-section" id="about">
+
+    <div class="about-container">
+
+        <!-- About Content -->
+
+        <div class="about-content">
+
+            <span class="about-label">
+                About BillCraft
+            </span>
+
+            <h2>
+                Simple Invoicing,
+                <span>Made Effortless.</span>
+            </h2>
+
+            <p class="about-intro">
+                BillCraft is a simple and modern invoice generation tool
+                designed to help individuals, freelancers and small
+                businesses create professional invoices without
+                complicated accounting software.
+            </p>
+
+            <p>
+                From entering client details to adding products and
+                calculating totals, BillCraft keeps the entire invoicing
+                process straightforward and efficient.
+            </p>
+
+
+            <!-- About Highlights -->
+
+            <div class="about-highlights">
+
+                <div class="about-highlight">
+
+                    <div class="highlight-icon">
+                        <i class='bx bxs-zap'></i>
+                    </div>
+
+                    <div>
+                        <h3>Fast & Simple</h3>
+
+                        <p>
+                            Create an invoice in just a few simple steps.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="about-highlight">
+
+                    <div class="highlight-icon">
+                        <i class='bx bx-check-shield'></i>
+                    </div>
+
+                    <div>
+                        <h3>Accurate Calculations</h3>
+
+                        <p>
+                            Automatically calculate totals, tax and discounts.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="about-highlight">
+
+                    <div class="highlight-icon">
+                        <i class='bx bx-devices'></i>
+                    </div>
+
+                    <div>
+                        <h3>Responsive Design</h3>
+
+                        <p>
+                            Create and review invoices across different devices.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <a href="#invoice" class="about-cta">
+                Create Your Invoice
+                <i class='bx bx-right-arrow-alt'></i>
+            </a>
+
+        </div>
+
+
+        <!-- About Visual -->
+
+        <div class="about-visual">
+
+            <div class="about-card">
+
+                <div class="about-card-header">
+
+                    <div class="about-card-logo">
+                        <i class='bx bx-receipt'></i>
+                    </div>
+
+                    <div>
+                        <span>BillCraft</span>
+                        <p>Invoice Generator</p>
+                    </div>
+
+                </div>
+
+
+                <div class="about-card-line"></div>
+
+
+                <div class="about-card-row">
+
+                    <div>
+                        <span>Invoice</span>
+                        <strong>#INV-001</strong>
+                    </div>
+
+                    <div>
+                        <span>Status</span>
+                        <strong class="paid-status">
+                            Ready
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="about-card-items">
+
+                    <div class="mini-item">
+                        <span>Website Development</span>
+                        <strong>₹15,000</strong>
+                    </div>
+
+                    <div class="mini-item">
+                        <span>Domain & Hosting</span>
+                        <strong>₹3,000</strong>
+                    </div>
+
+                    <div class="mini-item">
+                        <span>UI/UX Design</span>
+                        <strong>₹8,000</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="about-card-total">
+
+                    <span>Total</span>
+
+                    <strong>
+                        ₹26,000
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- Floating Card -->
+
+            <div class="about-floating-card">
+
+                <div class="floating-icon">
+                    <i class='bx bx-check'></i>
+                </div>
+
+                <div>
+                    <strong>Invoice Ready</strong>
+
+                    <span>
+                        Professional & Simple
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==============================
+     FAQ Section
+============================== -->
+
+<section class="faq-section" id="faq">
+
+    <div class="faq-container">
+
+        <!-- FAQ Heading -->
+
+        <div class="faq-heading">
+
+            <span>
+                Frequently Asked Questions
+            </span>
+
+            <h2>
+                Everything You Need to Know
+            </h2>
+
+            <p>
+                Find answers to common questions about creating
+                and managing invoices with BillCraft.
+            </p>
+
+        </div>
+
+
+        <!-- FAQ List -->
+
+        <div class="faq-list">
+
+
+            <!-- FAQ Item 1 -->
+
+            <div class="faq-item active">
+
+                <button
+                    type="button"
+                    class="faq-question"
+                >
+
+                    <span>
+                        What is BillCraft?
+                    </span>
+
+                    <i class='bx bx-chevron-down'></i>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        BillCraft is a simple invoice generation tool
+                        that helps individuals, freelancers and small
+                        businesses create professional invoices quickly
+                        and easily.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- FAQ Item 2 -->
+
+            <div class="faq-item">
+
+                <button
+                    type="button"
+                    class="faq-question"
+                >
+
+                    <span>
+                        Do I need to create an account?
+                    </span>
+
+                    <i class='bx bx-chevron-down'></i>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        No. BillCraft is designed to let you create
+                        invoices directly without requiring an account
+                        or complicated setup.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- FAQ Item 3 -->
+
+            <div class="faq-item">
+
+                <button
+                    type="button"
+                    class="faq-question"
+                >
+
+                    <span>
+                        Can I add multiple products or services?
+                    </span>
+
+                    <i class='bx bx-chevron-down'></i>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        Yes. You can add as many invoice items as
+                        required. Each item can have its own description,
+                        quantity and price, with the total calculated
+                        automatically.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- FAQ Item 4 -->
+
+            <div class="faq-item">
+
+                <button
+                    type="button"
+                    class="faq-question"
+                >
+
+                    <span>
+                        Can I apply tax and discounts?
+                    </span>
+
+                    <i class='bx bx-chevron-down'></i>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        Yes. BillCraft allows you to enter a tax
+                        percentage and discount percentage. The invoice
+                        automatically calculates the corresponding
+                        amounts and final total.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- FAQ Item 5 -->
+
+            <div class="faq-item">
+
+                <button
+                    type="button"
+                    class="faq-question"
+                >
+
+                    <span>
+                        Can I change the invoice currency?
+                    </span>
+
+                    <i class='bx bx-chevron-down'></i>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        Yes. You can currently choose between Indian
+                        Rupee, US Dollar, Euro and British Pound.
+                        All invoice amounts update automatically.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- FAQ Item 6 -->
+
+            <div class="faq-item">
+
+                <button
+                    type="button"
+                    class="faq-question"
+                >
+
+                    <span>
+                        Can I print or save my invoice?
+                    </span>
+
+                    <i class='bx bx-chevron-down'></i>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        Yes. Use the Print Invoice button to open the
+                        browser's print dialog. From there, you can print
+                        the invoice or choose your browser's PDF option
+                        to save it as a PDF.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
 
 <script src="script.js"></script>
 </body>

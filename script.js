@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const clearInvoiceBtn = document.getElementById("clearInvoiceBtn");
     const generateInvoiceBtn = document.getElementById("generateInvoiceBtn");
     const printInvoiceBtn = document.getElementById("printInvoiceBtn");
+    const invoiceStatus = document.getElementById("invoiceStatus");
 
     const businessName = document.getElementById("businessName");
     const businessEmail = document.getElementById("businessEmail");
@@ -593,6 +594,130 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
+    /* =====================================================
+   VALIDATE INVOICE
+===================================================== */
+
+function validateInvoice() {
+
+    const errors = [];
+
+
+    /*
+     * Business name
+     */
+
+    if (!businessName.value.trim()) {
+
+        errors.push(
+            "Enter your business name."
+        );
+
+    }
+
+
+    /*
+     * Client name
+     */
+
+    if (!clientName.value.trim()) {
+
+        errors.push(
+            "Enter the client name."
+        );
+
+    }
+
+
+    /*
+     * Invoice number
+     */
+
+    if (!invoiceNumber.value.trim()) {
+
+        errors.push(
+            "Enter an invoice number."
+        );
+
+    }
+
+
+    /*
+     * Validate invoice items
+     */
+
+    const rows =
+        itemsContainer.querySelectorAll(
+            ".item-row"
+        );
+
+
+    let hasValidItem = false;
+
+
+    rows.forEach(row => {
+
+        const name =
+            row.querySelector(
+                ".item-name"
+            ).value.trim();
+
+
+        const quantity =
+            parseFloat(
+                row.querySelector(
+                    ".item-quantity"
+                ).value
+            ) || 0;
+
+
+        const price =
+            parseFloat(
+                row.querySelector(
+                    ".item-price"
+                ).value
+            ) || 0;
+
+
+        if (
+            name &&
+            quantity > 0 &&
+            price > 0
+        ) {
+
+            hasValidItem = true;
+
+        }
+
+    });
+
+
+    if (!hasValidItem) {
+
+        errors.push(
+            "Add at least one item with a description and price."
+        );
+
+    }
+
+
+    return errors;
+
+}
+
+/* =====================================================
+   SHOW INVOICE STATUS
+===================================================== */
+
+function showInvoiceStatus(message, type) {
+
+    invoiceStatus.textContent = message;
+
+    invoiceStatus.className =
+        `invoice-status ${type}`;
+
+}
+
 
     /* =====================================================
        UPDATE COMPLETE INVOICE
@@ -815,29 +940,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
             updateInvoice();
 
+            printInvoiceBtn.disabled = true;
+
+            invoiceStatus.textContent = "";
+            invoiceStatus.className = "invoice-status";
+
         }
     );
 
 
-    /* =====================================================
-       GENERATE INVOICE
-    ===================================================== */
+/* =====================================================
+   GENERATE INVOICE
+===================================================== */
 
-    generateInvoiceBtn.addEventListener(
-        "click",
-        () => {
+generateInvoiceBtn.addEventListener(
+    "click",
+    () => {
 
-            updateInvoice();
+        /*
+         * Validate the invoice first.
+         */
 
+        const errors =
+            validateInvoice();
+
+
+        if (errors.length > 0) {
+
+            showInvoiceStatus(
+                errors[0],
+                "error"
+            );
 
             /*
-             * Scroll to preview on smaller screens.
+             * Scroll to the first relevant area
+             * on smaller screens.
              */
 
             if (window.innerWidth <= 1100) {
 
                 document
-                    .getElementById("invoicePreview")
+                    .getElementById("invoice")
                     .scrollIntoView({
                         behavior: "smooth",
                         block: "start"
@@ -845,8 +988,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
             }
 
+            return;
+
         }
-    );
+
+
+        /*
+         * Calculate everything again
+         * before generating.
+         */
+
+        updateInvoice();
+
+
+        /*
+         * Enable Print Invoice.
+         */
+
+        printInvoiceBtn.disabled = false;
+
+
+        /*
+         * Show success message.
+         */
+
+        showInvoiceStatus(
+            "✓ Invoice generated successfully. You can now print or save it as a PDF.",
+            "success"
+        );
+
+
+        /*
+         * Bring the preview into view
+         * on smaller screens.
+         */
+
+        if (window.innerWidth <= 1100) {
+
+            document
+                .getElementById("invoicePreview")
+                .scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+        }
+
+    }
+);
 
 
     /* =====================================================
@@ -870,5 +1059,58 @@ document.addEventListener("DOMContentLoaded", () => {
     ===================================================== */
 
     updateInvoice();
+
+});
+
+/* =========================================================
+   FAQ ACCORDION
+========================================================= */
+
+const faqItems =
+    document.querySelectorAll(".faq-item");
+
+
+faqItems.forEach(item => {
+
+    const question =
+        item.querySelector(".faq-question");
+
+
+    question.addEventListener(
+        "click",
+        () => {
+
+            const isActive =
+                item.classList.contains("active");
+
+
+            /*
+             * Close all FAQ items
+             */
+
+            faqItems.forEach(faqItem => {
+
+                faqItem.classList.remove(
+                    "active"
+                );
+
+            });
+
+
+            /*
+             * Open the clicked item
+             * if it wasn't already open.
+             */
+
+            if (!isActive) {
+
+                item.classList.add(
+                    "active"
+                );
+
+            }
+
+        }
+    );
 
 });
